@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ export default function Home() {
 
     const subject = encodeURIComponent("ASEEMIX — Early Interest");
     const body = encodeURIComponent(
-      `Hello ASEEMIX Team,\n\nI would like to be notified when you launch.\n\nEmail: ${email}\n`
+      `Hello ASEEMIX Team,\n\nI would like to be notified when you launch.\n\nEmail: ${email}\n`,
     );
 
     window.location.href = `mailto:contact@aseemix.ai?subject=${subject}&body=${body}`;
@@ -19,8 +20,16 @@ export default function Home() {
   return (
     <main className="container">
       <section className="card">
-        <h1 className="brand">ASEEMIX</h1>
-        <p className="tagline">From Research to Real-World Intelligence.</p>
+        <div className="logo">
+          <Image
+            src="/logo.png"
+            alt="ASEEMIX Logo"
+            width={407}
+            height={64}
+            priority
+          />
+        </div>
+        <p className="tagline font-stretch-50%">From Research to Real-World Intelligence.</p>
 
         <p className="description">
           We are building intelligent systems at the intersection of research,
@@ -49,7 +58,8 @@ export default function Home() {
       </section>
 
       <footer className="footer">
-        © {new Date().getFullYear()} Aseemix Dlab Technologies Private (OPC) Limited
+        © {new Date().getFullYear()} Aseemix Dlab Technologies Private (OPC)
+        Limited
       </footer>
     </main>
   );
