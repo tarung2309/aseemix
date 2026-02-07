@@ -24,8 +24,8 @@ export default function Home() {
           <Image
             src="/logo.png"
             alt="ASEEMIX Logo"
-            width={407}
-            height={64}
+            width={305}
+            height={63}
             priority
           />
         </div>
