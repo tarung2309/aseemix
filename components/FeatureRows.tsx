@@ -4,7 +4,7 @@ import { useReveal } from "@/hooks/useReveal";
 function FeatureRow({ reverse, tag, title, desc, bullets, visual }: {
   reverse?:boolean; tag:string; title:React.ReactNode; desc:string; bullets:string[]; visual:React.ReactNode;
 }) {
-  const ref = useReveal() as React.RefObject<HTMLElement>;
+  const ref = useReveal();
   return (
     <div ref={ref} className={`flex flex-col ${reverse?"lg:flex-row-reverse":"lg:flex-row"} items-center gap-16 max-w-7xl mx-auto py-20`}>
       <div className="flex-1">
