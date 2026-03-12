@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useReveal } from "@/hooks/useReveal";
 
 const useCases = [
@@ -57,34 +58,59 @@ export default function UseCasesSection() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto">
-        {useCases.map((uc) => (
-          <div
-            key={uc.num}
-            className="reveal rounded-xl p-7 transition-all duration-300 hover:-translate-y-1"
-            style={{
-              background: "var(--bg-surface)",
-              border: "1px solid var(--bd-soft)",
-            }}
-          >
-            <p
-              className="font-extrabold leading-none mb-3"
+        {useCases.map((uc) => {
+          const card = (
+            <div
+              key={uc.num}
+              className="reveal rounded-xl p-7 transition-all duration-300 hover:-translate-y-1"
               style={{
-                fontFamily: "var(--font-syne)",
-                fontSize: "2.5rem",
-                color: "var(--num-deco)",
+                background: "var(--bg-surface)",
+                border: "1px solid var(--bd-soft)",
+                cursor: uc.num === "04" ? "pointer" : "default",
               }}
             >
-              {uc.num}
-            </p>
-            <h3
-              className="font-bold mb-2"
-              style={{ fontSize: "0.95rem", fontFamily: "var(--font-syne)", color: "var(--tx-head)" }}
-            >
-              {uc.title}
-            </h3>
-            <p className="text-[0.8rem] text-mid leading-relaxed">{uc.desc}</p>
-          </div>
-        ))}
+              <p
+                className="font-extrabold leading-none mb-3"
+                style={{
+                  fontFamily: "var(--font-syne)",
+                  fontSize: "2.5rem",
+                  color: "var(--num-deco)",
+                }}
+              >
+                {uc.num}
+              </p>
+              <h3
+                className="font-bold mb-2"
+                style={{ fontSize: "0.95rem", fontFamily: "var(--font-syne)", color: "var(--tx-head)" }}
+              >
+                {uc.title}
+              </h3>
+              <p className="text-[0.8rem] text-mid leading-relaxed">{uc.desc}</p>
+              {uc.num === "04" && (
+                <div
+                  style={{
+                    marginTop: 14,
+                    fontSize: ".68rem",
+                    fontFamily: "monospace",
+                    letterSpacing: ".08em",
+                    color: "#FF6B35",
+                    opacity: 0.8,
+                  }}
+                >
+                  Explore AI-rogyam →
+                </div>
+              )}
+            </div>
+          );
+
+          return uc.num === "04" ? (
+            <Link key={uc.num} href="/dietplanner" style={{ textDecoration: "none" }}>
+              {card}
+            </Link>
+          ) : (
+            card
+          );
+        })}
       </div>
     </section>
   );
