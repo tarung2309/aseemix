@@ -1,8 +1,25 @@
+import type { Metadata } from "next";
+import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
+import "./styles/transformation-roadmap.css"
 
-export const metadata = {
-  title: "ASEEMIX — Coming Soon",
-  description: "ASEEMIX | Engineering the Infinite.",
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-syne",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-dm",
+});
+
+export const metadata: Metadata = {
+  title: "SmartHospital — Intelligence Platform for Modern Healthcare",
+  description:
+    "Transform hospital operations and clinical care with our AI-powered Smart Hospital Platform that integrates hospital systems, clinical intelligence, and real-time analytics.",
 };
 
 export default function RootLayout({
@@ -11,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
       <body>{children}</body>
     </html>
   );
