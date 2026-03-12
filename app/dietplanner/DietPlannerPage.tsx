@@ -847,6 +847,126 @@ function PlatCTA() {
   );
 }
 
+function TagHero({ children, color = "brand" }: { children: React.ReactNode; color?: string }) {
+  return (
+    <div className={`section-tag`} style={{ color: color === "accent" ? "var(--accent)" : undefined, background: color === "accent" ? "rgba(255,107,53,0.1)" : undefined, borderColor: color === "accent" ? "rgba(255,107,53,0.25)" : undefined }}>
+      <span className="dot" style={{ background: color === "accent" ? "var(--accent)" : undefined }} />
+      {children}
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════
+   HERO
+════════════════════════════════════════════════════════════ */
+function Hero({ dark }: { dark: boolean }) {
+  return (
+    
+    <section
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        background:
+          "radial-gradient(ellipse at 70% 40%, rgba(61,82,160,0.18) 0%, transparent 60%), var(--bg-page-deep)",
+        padding: "90px 5% 60px",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div className="hero-grid" />
+      {/* ambient blobs */}
+      <div style={{ position: "absolute", top: "15%", right: "8%", width: 500, height: 500, borderRadius: "50%", background: dark ? "radial-gradient(circle,rgba(61,82,160,0.15) 0%,transparent 70%)" : "radial-gradient(circle,rgba(112,145,230,0.18) 0%,transparent 65%)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", bottom: "10%", left: "5%", width: 300, height: 300, borderRadius: "50%", background: dark ? "radial-gradient(circle,rgba(255,107,53,0.08) 0%,transparent 70%)" : "radial-gradient(circle,rgba(255,107,53,0.12) 0%,transparent 65%)", pointerEvents: "none" }} />
+
+      <div style={{ maxWidth: 1280, margin: "0 auto", width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
+        {/* Left */}
+        <div style={{ animation: "fadeUp 0.8s ease both" }}>
+          <TagHero color="accent">Clinical Nutrition Intelligence Platform</TagHero>
+          <h1 className="section-title font-syne" style={{ fontSize: "clamp(2.4rem,4.5vw,3.8rem)", marginTop: 8, marginBottom: 20, lineHeight: 1.06 }}>
+            <span className="gt-full">AI-rogyam</span>
+            <br />
+            <span style={{ color: "var(--tx-head)" }}>Nutrition Intelligence</span>
+            <br />
+            <span style={{ fontFamily: "'Playfair Display',serif", fontStyle: "italic", fontWeight: 500, fontSize: "clamp(1.6rem,3vw,2.4rem)", color: "var(--tx-muted)" }}>
+              for Smart Hospitals
+            </span>
+          </h1>
+          <p className="section-sub">
+            Deliver personalized diet and fitness programs using clinical data, AI-driven decision support, and hospital nutrition workflows — integrated directly into your Smart Hospital Platform.
+          </p>
+          <div style={{ display: "flex", gap: 12, marginTop: 28, flexWrap: "wrap" }}>
+            <button className="btn-accent">Request Demo</button>
+            <button className="btn-ghost">Explore Platform</button>
+          </div>
+          <div style={{ display: "flex", gap: 20, marginTop: 32, flexWrap: "wrap" }}>
+            {[["50+", "Hospitals"], ["2M+", "Patients"], ["94%", "AI Accuracy"]].map(([n, l]) => (
+              <div key={l}>
+                <div className="stat-num">{n}</div>
+                <div style={{ fontSize: ".65rem", fontFamily: "'DM Mono',monospace", letterSpacing: ".1em", color: "var(--tx-muted)", marginTop: 2 }}>{l.toUpperCase()}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right: Nutrition Dashboard Visual */}
+        <div style={{ animation: "fadeUp 0.8s 0.2s ease both", position: "relative" }}>
+          <NutritionDashboardVisual dark={dark} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Mini Nutrition Dashboard Visual ── */
+function NutritionDashboardVisual({ dark }: { dark: boolean }) {
+  const cardBg = dark ? "rgba(255,255,255,0.04)" : "#fff";
+  const cardBd = dark ? "rgba(112,145,230,0.15)" : "rgba(61,82,160,0.1)";
+  const shadow = dark ? "0 24px 80px rgba(0,0,0,0.5)" : "0 24px 80px rgba(61,82,160,0.15)";
+  return (
+    <div style={{ background: dark ? "rgba(13,17,33,0.9)" : "#F4F1FF", borderRadius: 20, padding: 20, border: `1px solid ${cardBd}`, boxShadow: shadow, fontFamily: "'DM Sans',sans-serif" }}>
+      {/* Header */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+        <div>
+          <div style={{ fontSize: ".65rem", fontFamily: "'DM Mono',monospace", letterSpacing: ".1em", color: "var(--tx-muted)", textTransform: "uppercase" }}>Patient Nutrition Plan</div>
+          <div style={{ fontSize: ".9rem", fontFamily: "'Syne',serif", fontWeight: 700, color: "var(--tx-head)" }}>Rahul Sharma · ICU Bed 3A</div>
+        </div>
+        <div style={{ padding: "4px 10px", borderRadius: 100, background: "rgba(52,211,153,0.15)", border: "1px solid rgba(52,211,153,0.3)", fontSize: ".6rem", color: "#34d399", fontFamily: "'DM Mono',monospace" }}>● ACTIVE</div>
+      </div>
+
+      {/* Macro bars */}
+      {[
+        { label: "Protein", val: 78, target: 95, color: "#7091E6" },
+        { label: "Calories", val: 1650, target: 2000, color: "#FF6B35" },
+        { label: "Carbs", val: 180, target: 220, color: "#34d399" },
+      ].map((m) => (
+        <div key={m.label} style={{ marginBottom: 10 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5, fontSize: ".68rem" }}>
+            <span style={{ color: "var(--tx-muted)" }}>{m.label}</span>
+            <span style={{ color: m.color, fontFamily: "'DM Mono',monospace" }}>{m.val} / {m.target}{m.label === "Calories" ? " kcal" : "g"}</span>
+          </div>
+          <div style={{ height: 5, borderRadius: 3, background: dark ? "rgba(255,255,255,0.07)" : "rgba(61,82,160,0.08)", overflow: "hidden" }}>
+            <div style={{ height: "100%", width: `${Math.round(m.val / m.target * 100)}%`, background: m.color, borderRadius: 3, boxShadow: `0 0 8px ${m.color}60`, transition: "width 1.2s ease" }} />
+          </div>
+        </div>
+      ))}
+
+      {/* AI Recommendation chip */}
+      <div style={{ marginTop: 14, padding: "10px 14px", borderRadius: 12, background: dark ? "rgba(255,107,53,0.08)" : "rgba(255,107,53,0.06)", border: "1px solid rgba(255,107,53,0.2)" }}>
+        <div style={{ fontSize: ".58rem", fontFamily: "'DM Mono',monospace", letterSpacing: ".1em", color: "var(--accent)", marginBottom: 4 }}>🤖 AI RECOMMENDATION</div>
+        <div style={{ fontSize: ".73rem", color: "var(--tx-body)", lineHeight: 1.5 }}>Increase protein intake. Add paneer to lunch — compatible with Type 2 Diabetes protocol.</div>
+      </div>
+
+      {/* Meal plan chips */}
+      <div style={{ marginTop: 14, display: "flex", gap: 6, flexWrap: "wrap" }}>
+        {["Breakfast ✓", "Lunch →", "Dinner ○", "Snack ○"].map((m, i) => (
+          <div key={m} style={{ padding: "4px 10px", borderRadius: 8, fontSize: ".62rem", background: i === 0 ? "rgba(52,211,153,0.12)" : i === 1 ? "rgba(255,107,53,0.1)" : dark ? "rgba(255,255,255,0.05)" : "rgba(61,82,160,0.06)", border: `1px solid ${i === 0 ? "rgba(52,211,153,0.3)" : i === 1 ? "rgba(255,107,53,0.25)" : "rgba(61,82,160,0.1)"}`, color: i === 0 ? "#34d399" : i === 1 ? "var(--accent)" : "var(--tx-muted)" }}>{m}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ════════════════════════════════════════════════════════════
    ROOT
 ════════════════════════════════════════════════════════════ */

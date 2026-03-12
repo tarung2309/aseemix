@@ -100,18 +100,17 @@ export default function ArchitectureSection() {
       <div className="reveal max-w-4xl mx-auto flex flex-col gap-1.5">
         {layers.map((layer, li) => (
           <div key={layer.num}>
-            <div className="grid items-center" style={{ gridTemplateColumns: "160px 1fr", gap: "16px" }}>
+            <div className="grid items-center grid-cols-1 sm:grid-cols-[120px_1fr] gap-3 sm:gap-4">
               {/* Label */}
               <div
-                className="text-right text-[0.7rem] font-semibold text-mid pr-4 leading-tight"
-                style={{ borderRight: "1px solid rgba(112,145,230,0.2)" }}
+                className="text-left sm:text-right text-[0.7rem] font-semibold text-mid sm:pr-4 pb-1 sm:pb-0 leading-tight border-b sm:border-b-0 sm:border-r border-[rgba(112,145,230,0.2)]"
               >
                 Layer {layer.num}
                 <br />
                 <span className="text-[0.65rem]">{layer.label}</span>
               </div>
               {/* Chips */}
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 {layer.chips.map((chip) => (
                   <div
                     key={chip.label}
@@ -130,9 +129,9 @@ export default function ArchitectureSection() {
             </div>
             {/* Connector */}
             {li < layers.length - 1 && (
-              <div className="grid items-center" style={{ gridTemplateColumns: "160px 1fr", gap: "16px", padding: "3px 0" }}>
+              <div className="grid items-center grid-cols-1 sm:grid-cols-[120px_1fr] gap-3 sm:gap-4 py-[3px]">
                 <div />
-                <div className="flex gap-2 justify-around px-4">
+                <div className="flex gap-2 justify-start sm:justify-around px-4">
                   {layer.chips.map((_, i) => (
                     <span key={i} className="text-[rgba(112,145,230,0.3)] text-sm">↕</span>
                   ))}

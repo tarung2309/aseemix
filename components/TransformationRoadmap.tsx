@@ -189,14 +189,89 @@ function StageRow({
   isActive,
   visible,
   onClick,
+  isMobile,
 }: {
   stage: typeof stages[0];
   index: number;
   isActive: boolean;
   visible: boolean;
   onClick: () => void;
+  isMobile: boolean;
 }) {
   const isLeft = index % 2 === 0;
+
+  if (isMobile) {
+    return (
+      <div
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? "none" : "translateY(20px)",
+          transition: `opacity 0.7s ${index * 0.1}s ease, transform 0.7s ${index * 0.1}s ease`,
+          cursor: "pointer",
+        }}
+        onClick={onClick}
+      >
+        <div
+          style={{
+            background: isActive ? `linear-gradient(135deg, ${stage.bgFrom}, var(--bg-page-deep))` : "var(--bg-surface)",
+            border: `1px solid ${isActive ? stage.borderColor : "var(--bd-soft)"}`,
+            borderRadius: "16px",
+            padding: "20px 24px",
+            transition: "all 0.4s cubic-bezier(0.4,0,0.2,1)",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {/* "Our Platform" badge */}
+          {stage.isHighlighted && (
+            <div style={{
+              position: "absolute", top: "16px", right: "16px",
+              padding: "4px 10px", borderRadius: "100px",
+              background: "rgba(255,107,53,0.15)", border: "1px solid rgba(255,107,53,0.4)",
+              fontSize: "0.58rem", fontFamily: "'DM Mono', monospace",
+              letterSpacing: "0.12em", color: "#FF6B35", textTransform: "uppercase",
+            }}>◈ Our Platform</div>
+          )}
+          {/* Stage number + label */}
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
+            <div style={{
+              width: "38px", height: "38px", borderRadius: "50%", flexShrink: 0,
+              background: isActive ? `radial-gradient(circle, ${stage.color}40, ${stage.color}15)` : "var(--bg-surface)",
+              border: `2px solid ${isActive ? stage.color : "var(--bd-soft)"}`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              boxShadow: isActive ? `0 0 16px ${stage.glowColor}` : "none",
+              transition: "all 0.4s",
+            }}>
+              <span style={{ fontSize: "0.82rem", fontFamily: "var(--font-syne)", fontWeight: 800, color: isActive ? stage.color : "var(--tx-faint)" }}>
+                {stage.number}
+              </span>
+            </div>
+            <div>
+              <span style={{ fontSize: "0.58rem", fontFamily: "'DM Mono', monospace", letterSpacing: "0.16em", color: stage.textDim, display: "block", marginBottom: "2px" }}>STAGE {stage.number}</span>
+              <h3 style={{ fontSize: "1.1rem", fontFamily: "var(--font-syne)", fontWeight: 800, color: isActive ? "var(--tx-head)" : "var(--color-mid)", letterSpacing: "-0.02em", lineHeight: 1.1, margin: 0, transition: "color 0.3s" }}>
+                {stage.label}
+              </h3>
+            </div>
+          </div>
+          {/* Characteristics */}
+          <div style={{ marginBottom: "14px" }}>
+            {stage.characteristics.map((c) => (
+              <div key={c} style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "5px", opacity: isActive ? 1 : 0.5 }}>
+                <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: isActive ? stage.color : "var(--tx-faint)", flexShrink: 0 }} />
+                <span style={{ fontSize: "0.78rem", color: isActive ? "var(--color-light)" : "var(--tx-faint)" }}>{c}</span>
+              </div>
+            ))}
+          </div>
+          {/* Active indicator */}
+          <div style={{
+            position: "absolute", left: 0, top: "20%", bottom: "20%", width: "3px", borderRadius: "3px",
+            background: isActive ? `linear-gradient(to bottom, transparent, ${stage.color}, transparent)` : "transparent",
+            transition: "all 0.4s",
+          }} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -469,14 +544,32 @@ function StageRow({
 /* ─────────────────────────────────────────────────────────────
    TRANSITION ARROW
 ───────────────────────────────────────────────────────────── */
-function TransitionArrow({ t, index, activeIndex, visible }: {
+function TransitionArrow({ t, index, activeIndex, visible, isMobile }: {
   t: typeof transitions[0];
   index: number;
   activeIndex: number;
   visible: boolean;
+  isMobile: boolean;
 }) {
   const isPast = index < activeIndex;
   const isCurrent = index === activeIndex;
+
+  if (isMobile) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", padding: "4px 0", opacity: visible ? 1 : 0 }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
+          {[0, 1, 2].map(i => (
+            <div key={i} style={{
+              width: 0, height: 0,
+              borderLeft: "5px solid transparent", borderRight: "5px solid transparent",
+              borderTop: `6px solid ${isPast || isCurrent ? "rgba(255,107,53,0.6)" : "var(--bd-soft)"}`,
+              opacity: 1 - i * 0.25,
+            }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{
@@ -684,6 +777,7 @@ function IntelligenceMeter({ activeIndex, visible }: { activeIndex: number; visi
 export default function TransformationRoadmap() {
   const [activeStage, setActiveStage] = useState(2); // Default: Smart Hospital
   const [visible, setVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -695,18 +789,18 @@ export default function TransformationRoadmap() {
     return () => obs.disconnect();
   }, []);
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const current = stages[activeStage];
 
   return (
     <section
       ref={ref}
-      /* style={{
-        padding: "90px 5% 100px",
-        background: "var(--bg-page-deep)",
-        position: "relative",
-        overflow: "hidden",
-        fontFamily: "var(--font-dm)",
-      }} */
       style={{ padding: "90px 5% 100px", background: "var(--bg-page-deep)" }}
     >
 
@@ -789,7 +883,7 @@ export default function TransformationRoadmap() {
             The Roadmap to the{" "}
             <br />
             <em className="not-italic gradient-text-blue">Future of Smart Hospitals</em>
-          
+
           </h2>
 
           <p style={{
@@ -830,12 +924,12 @@ export default function TransformationRoadmap() {
         </div>
 
         {/* ── MAIN LAYOUT: Roadmap + Sidebar ──────────────────── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 260px", gap: "32px", alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 260px", gap: "32px", alignItems: "start" }}>
 
           {/* Roadmap column */}
           <div style={{ position: "relative" }}>
-            {/* Energy spine */}
-            <EnergySpine activeIndex={activeStage} visible={visible} />
+            {/* Energy spine — hide on mobile */}
+            {!isMobile && <EnergySpine activeIndex={activeStage} visible={visible} />}
 
             {/* Stages + transitions */}
             <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
@@ -847,6 +941,7 @@ export default function TransformationRoadmap() {
                     isActive={activeStage === i}
                     visible={visible}
                     onClick={() => setActiveStage(i)}
+                    isMobile={isMobile}
                   />
                   {i < stages.length - 1 && (
                     <TransitionArrow
@@ -854,6 +949,7 @@ export default function TransformationRoadmap() {
                       index={i}
                       activeIndex={activeStage}
                       visible={visible}
+                      isMobile={isMobile}
                     />
                   )}
                 </div>
@@ -863,7 +959,7 @@ export default function TransformationRoadmap() {
 
           {/* Sidebar */}
           <div style={{
-            position: "sticky",
+            position: isMobile ? "static" : "sticky",
             top: "100px",
             display: "flex",
             flexDirection: "column",

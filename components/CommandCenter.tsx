@@ -87,14 +87,14 @@ export default function CommandCenter() {
         >
           Smart Hospital Command Center
         </span>
-        <div className="flex items-center gap-1.5 text-[0.72rem] text-green-400">
+        <div className="hidden sm:flex items-center gap-1.5 text-[0.72rem] text-green-400">
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 pulse-dot" />
           Live — All Systems Operational
         </div>
       </div>
 
       {/* Body: 3-column grid */}
-      <div className="grid grid-cols-[180px_1fr_180px] divide-x divide-[rgba(112,145,230,0.1)]">
+      <div className="grid grid-cols-1 lg:grid-cols-[180px_1fr_180px] divide-x divide-[rgba(112,145,230,0.1)]">
         {/* Sidebar */}
         <div className="p-4 bg-[var(--bg-panel)] hidden lg:block">
           <p className="text-[0.62rem] uppercase tracking-widest text-mid mb-3">Navigation</p>
@@ -134,7 +134,7 @@ export default function CommandCenter() {
         {/* Main */}
         <div className="p-4">
           {/* Metrics */}
-          <div className="grid grid-cols-4 gap-2.5 mb-3.5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-3.5">
             {metrics.map((m) => (
               <div
                 key={m.label}
@@ -157,7 +157,7 @@ export default function CommandCenter() {
           </div>
 
           {/* Charts */}
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {/* Bar chart */}
             <div
               className="rounded-lg p-3"
@@ -217,7 +217,7 @@ export default function CommandCenter() {
               <p className="text-[0.65rem] text-mid uppercase tracking-wider mb-2.5">
                 AI Clinical Decision Support — Real-time Flags
               </p>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {aiFlags.map((f) => (
                   <div key={f.label} className={`rounded-md p-2 border text-[0.68rem] ${f.bg}`}>
                     <p className={`font-semibold mb-0.5 ${f.tc}`}>{f.emoji} {f.label}</p>

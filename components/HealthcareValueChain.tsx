@@ -679,26 +679,28 @@ export default function HealthcareValueChain() {
         </div>
 
         {/* ── MAIN STAGE CARDS ROW ────────────────────────────── */}
-        <div style={{ display: "flex", gap: "8px", alignItems: "stretch" }}>
-          {stages.map((stage, i) => (
-            <div key={stage.id} style={{ display: "flex", flex: 1, alignItems: "stretch" }}>
-              <StageCard
-                stage={stage}
-                isActive={active === stage.id}
-                isAdjacent={Math.abs(i - activeIndex) === 1}
-                onClick={() => setActive(stage.id)}
-                index={i}
-                visible={visible}
-              />
-              {i < stages.length - 1 && (
-                <Connector
-                  fromColor={stage.color}
-                  toColor={stages[i + 1].color}
-                  active={active === stage.id || active === stages[i + 1].id}
+        <div style={{ overflowX: "auto", marginLeft: "-5%", marginRight: "-5%", paddingLeft: "5%", paddingRight: "5%", paddingBottom: "12px" }}>
+          <div style={{ display: "flex", gap: "8px", alignItems: "stretch", minWidth: "720px" }}>
+            {stages.map((stage, i) => (
+              <div key={stage.id} style={{ display: "flex", flex: 1, alignItems: "stretch" }}>
+                <StageCard
+                  stage={stage}
+                  isActive={active === stage.id}
+                  isAdjacent={Math.abs(i - activeIndex) === 1}
+                  onClick={() => setActive(stage.id)}
+                  index={i}
+                  visible={visible}
                 />
-              )}
-            </div>
-          ))}
+                {i < stages.length - 1 && (
+                  <Connector
+                    fromColor={stage.color}
+                    toColor={stages[i + 1].color}
+                    active={active === stage.id || active === stages[i + 1].id}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* ── ACTIVE STAGE DETAIL PANEL ──────────────────────── */}
