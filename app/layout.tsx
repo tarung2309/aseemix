@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans } from "next/font/google";
+import RecaptchaProvider from './RecaptchaProvider';
 import "./globals.css";
 import "./styles/transformation-roadmap.css"
 
@@ -29,7 +30,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <RecaptchaProvider>
+          {children}
+        </RecaptchaProvider>
+      </body>
     </html>
   );
 }

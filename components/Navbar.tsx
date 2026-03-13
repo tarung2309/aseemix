@@ -60,14 +60,13 @@ export default function Navbar() {
         </ul>
 
         {/* Desktop CTA */}
-        <a
-          href="#cta"
-          onClick={(e) => handleNav(e, "#cta")}
+        <Link
+          href="/request-demo"
           className="hidden md:inline-block bg-accent text-white px-5 py-2.5 rounded-md text-[0.85rem] font-semibold tracking-wide no-underline transition-all duration-200 hover:-translate-y-0.5"
           style={{ boxShadow: "0 0 20px rgba(255,107,53,0.3)" }}
         >
           Request Demo
-        </a>
+        </Link>
 
         {/* Mobile hamburger */}
         <button
@@ -113,14 +112,13 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <a
-            href="#cta"
-            onClick={(e) => handleNav(e, "#cta")}
+          <Link
+            href="/request-demo"
             className="block mt-4 bg-accent text-white px-5 py-3 rounded-md text-[0.85rem] font-semibold tracking-wide no-underline text-center"
             style={{ boxShadow: "0 0 20px rgba(255,107,53,0.3)" }}
           >
             Request Demo
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

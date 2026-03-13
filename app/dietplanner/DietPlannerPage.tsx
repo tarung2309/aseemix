@@ -169,22 +169,24 @@ function PlatHero() {
           </p>
 
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 32 }}>
-            <button
-              style={{
-                padding: "11px 24px",
-                borderRadius: 100,
-                border: "none",
-                cursor: "pointer",
-                fontFamily: "var(--font-syne)",
-                fontWeight: 700,
-                fontSize: ".85rem",
-                background: "linear-gradient(135deg,#FF6B35,#FF8C5A)",
-                color: "#fff",
-                boxShadow: "0 4px 18px rgba(255,107,53,0.3)",
-              }}
-            >
-              Request Demo →
-            </button>
+            <Link href="/request-demo">
+              <button
+                style={{
+                  padding: "11px 24px",
+                  borderRadius: 100,
+                  border: "none",
+                  cursor: "pointer",
+                  fontFamily: "var(--font-syne)",
+                  fontWeight: 700,
+                  fontSize: ".85rem",
+                  background: "linear-gradient(135deg,#FF6B35,#FF8C5A)",
+                  color: "#fff",
+                  boxShadow: "0 4px 18px rgba(255,107,53,0.3)",
+                }}
+              >
+                Request Demo →
+              </button>
+            </Link>
             <button
               style={{
                 padding: "11px 24px",
@@ -806,22 +808,24 @@ function PlatCTA() {
           systems in days, not months.
         </p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-          <button
-            style={{
-              padding: "14px 32px",
-              borderRadius: 100,
-              border: "none",
-              cursor: "pointer",
-              fontFamily: "var(--font-syne)",
-              fontWeight: 700,
-              fontSize: ".9rem",
-              background: "linear-gradient(135deg,#FF6B35,#FF8C5A)",
-              color: "#fff",
-              boxShadow: "0 6px 24px rgba(255,107,53,0.4)",
-            }}
-          >
-            Request Demo
-          </button>
+          <Link href="/request-demo">
+            <button
+              style={{
+                padding: "14px 32px",
+                borderRadius: 100,
+                border: "none",
+                cursor: "pointer",
+                fontFamily: "var(--font-syne)",
+                fontWeight: 700,
+                fontSize: ".9rem",
+                background: "linear-gradient(135deg,#FF6B35,#FF8C5A)",
+                color: "#fff",
+                boxShadow: "0 6px 24px rgba(255,107,53,0.4)",
+              }}
+            >
+              Request Demo
+            </button>
+          </Link>
           <Link
             href="/"
             style={{
@@ -896,7 +900,9 @@ function Hero({ dark }: { dark: boolean }) {
             Deliver personalized diet and fitness programs using clinical data, AI-driven decision support, and hospital nutrition workflows — integrated directly into your Smart Hospital Platform.
           </p>
           <div style={{ display: "flex", gap: 12, marginTop: 28, flexWrap: "wrap" }}>
-            <button className="btn-accent">Request Demo</button>
+            <Link href="/request-demo">
+              <button className="btn-accent">Request Demo</button>
+            </Link>
             <button className="btn-ghost">Explore Platform</button>
           </div>
           <div style={{ display: "flex", gap: 20, marginTop: 32, flexWrap: "wrap" }}>

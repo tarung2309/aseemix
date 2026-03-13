@@ -24,7 +24,7 @@ export default function CTASection() {
       </p>
       <div className="reveal flex flex-wrap gap-4 justify-center mt-10">
         <a
-          href="#"
+          href="/request-demo"
           className="bg-accent text-white px-9 py-3.5 rounded-lg font-semibold text-[0.9rem] no-underline transition-all duration-200 hover:-translate-y-0.5"
           style={{ boxShadow: "0 0 30px rgba(255,107,53,0.4)" }}
         >

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CommandCenter from "./CommandCenter";
 
 export default function HeroSection() {
@@ -53,13 +54,13 @@ export default function HeroSection() {
 
       {/* CTAs */}
       <div className="fade-up-4 relative z-10 flex flex-wrap gap-4 mt-10 justify-center">
-        <a
-          href="#cta"
+        <Link
+          href="/request-demo"
           className="bg-accent text-white px-8 py-3.5 rounded-lg font-semibold text-[0.9rem] no-underline transition-all duration-200 hover:-translate-y-0.5"
           style={{ boxShadow: "0 0 30px rgba(255,107,53,0.4)" }}
         >
           Request Demo
-        </a>
+        </Link>
         <a
           href="#platform-intro"
           className="bg-transparent text-light px-8 py-3.5 rounded-lg border border-[rgba(173,187,218,0.3)] font-medium text-[0.9rem] no-underline transition-all duration-200 hover:border-bright hover:text-[var(--tx-head)] hover:bg-[rgba(112,145,230,0.08)]"

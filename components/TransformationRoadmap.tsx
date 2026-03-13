@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import "../app/styles/transformation-roadmap.css"
 
 /* ─────────────────────────────────────────────────────────────
@@ -1147,22 +1148,24 @@ export default function TransformationRoadmap() {
                 </div>
               </div>
             ))}
-            <button style={{
-              padding: "12px 24px",
-              borderRadius: "10px",
-              background: "linear-gradient(135deg, #FF6B35, #FF8C5A)",
-              border: "none",
-              color: "#fff",
-              fontSize: "0.82rem",
-              fontFamily: "var(--font-syne)",
-              fontWeight: 700,
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-              boxShadow: "0 6px 24px rgba(255,107,53,0.4)",
-              letterSpacing: "-0.01em",
-            }}>
-              Start Your Transformation →
-            </button>
+            <Link href="/request-demo">
+              <button style={{
+                padding: "12px 24px",
+                borderRadius: "10px",
+                background: "linear-gradient(135deg, #FF6B35, #FF8C5A)",
+                border: "none",
+                color: "#fff",
+                fontSize: "0.82rem",
+                fontFamily: "var(--font-syne)",
+                fontWeight: 700,
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+                boxShadow: "0 6px 24px rgba(255,107,53,0.4)",
+                letterSpacing: "-0.01em",
+              }}>
+                Start Your Transformation →
+              </button>
+            </Link>
           </div>
         </div>
 

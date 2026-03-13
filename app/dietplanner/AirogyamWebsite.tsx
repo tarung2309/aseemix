@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, useCallback } from "react";
+import Link from "next/link";
 
 /* ════════════════════════════════════════════════════════════
    CSS VARIABLES + KEYFRAMES (injected as <style>)
@@ -370,7 +371,9 @@ function Nav({ dark, toggle, onNav }: { dark: boolean; toggle: () => void; onNav
         <button className="mode-toggle" onClick={toggle} aria-label="Toggle dark mode">
           <span className="knob">{dark ? "☽" : "☀"}</span>
         </button>
-        <button className="btn-accent" style={{ padding: "8px 18px", fontSize: ".78rem" }}>Request Demo</button>
+        <Link href="/request-demo">
+          <button className="btn-accent" style={{ padding: "8px 18px", fontSize: ".78rem" }}>Request Demo</button>
+        </Link>
       </div>
     </nav>
   );
@@ -404,7 +407,9 @@ function Hero({ dark }: { dark: boolean }) {
             Deliver personalized diet and fitness programs using clinical data, AI-driven decision support, and hospital nutrition workflows — integrated directly into your Smart Hospital Platform.
           </p>
           <div style={{ display: "flex", gap: 12, marginTop: 28, flexWrap: "wrap" }}>
-            <button className="btn-accent">Request Demo</button>
+            <Link href="/request-demo">
+              <button className="btn-accent">Request Demo</button>
+            </Link>
             <button className="btn-ghost">Explore Platform</button>
           </div>
           <div style={{ display: "flex", gap: 20, marginTop: 32, flexWrap: "wrap" }}>
@@ -905,7 +910,9 @@ function CTA() {
             Join 50+ hospitals that have already transformed their clinical nutrition programs. Request a personalized demo today.
           </p>
           <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <button className="btn-accent" style={{ padding: "14px 32px", fontSize: ".9rem", animation: "pulseRing 2s ease infinite" }}>Request Demo</button>
+            <Link href="/request-demo">
+              <button className="btn-accent" style={{ padding: "14px 32px", fontSize: ".9rem", animation: "pulseRing 2s ease infinite" }}>Request Demo</button>
+            </Link>
             <button style={{ padding: "14px 32px", border: "1.5px solid rgba(255,255,255,0.3)", borderRadius: 10, background: "transparent", color: "#fff", fontFamily: "'Syne',serif", fontWeight: 700, fontSize: ".9rem", cursor: "pointer", transition: "all 0.3s" }}>Talk to an Expert</button>
           </div>
         </div>
